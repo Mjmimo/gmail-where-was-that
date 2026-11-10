@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1794326340750,
+      "tag": "0000_helpai_connections_and_plans",
+      "breakpoints": true
+    }
+  ]
 }
