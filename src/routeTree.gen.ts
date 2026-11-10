@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiOauthGoogleReturnRouteImport } from './routes/api/oauth/google/return'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiOauthGoogleReturnRoute = ApiOauthGoogleReturnRouteImport.update({
+  id: '/api/oauth/google/return',
+  path: '/api/oauth/google/return',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/oauth/google/return': typeof ApiOauthGoogleReturnRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/oauth/google/return': typeof ApiOauthGoogleReturnRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/oauth/google/return': typeof ApiOauthGoogleReturnRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/api/oauth/google/return'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/api/oauth/google/return'
+  id: '__root__' | '/' | '/api/oauth/google/return'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiOauthGoogleReturnRoute: typeof ApiOauthGoogleReturnRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/oauth/google/return': {
+      id: '/api/oauth/google/return'
+      path: '/api/oauth/google/return'
+      fullPath: '/api/oauth/google/return'
+      preLoaderRoute: typeof ApiOauthGoogleReturnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiOauthGoogleReturnRoute: ApiOauthGoogleReturnRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
