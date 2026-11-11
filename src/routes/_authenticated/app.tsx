@@ -56,7 +56,7 @@ function AppPage() {
 
   async function connect() {
     const popup = window.open("", "lovable-oauth", "width=600,height=720");
-    if (!popup) return toast.error("Autorise les fenêtres pop-up puis réessaie.");
+    if (!popup) { toast.error("Autorise les fenêtres pop-up puis réessaie."); return; }
     try {
       const { authorizationUrl } = await startGmailConnect();
       const done = waitForOAuth(popup);
